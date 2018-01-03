@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button } from 'semantic-ui-react'
+import Folder from './folder'
 
 class Cosmos extends React.Component {
 
@@ -59,12 +60,13 @@ class Cosmos extends React.Component {
                                     <Card
                                         fluid
                                         link
-                                        header='Rick Sanchez'
-                                        meta='Scientist'
-                                        description={[
-                                            'Rick is a genius scientist whose alcoholism and reckless,',
-                                            ' nihilistic behavior are a source of concern for his family',
-                                        ].join('')}
+                                        header='Waiting for Godot'
+                                        description={
+                                            <Label size='tiny' as='a' inverted color='blue'>
+                                                eng
+                                                <Icon name='delete' />
+                                            </Label>
+                                        }
                                     />
                                     <Progress percent={100} attached='bottom' />
                                 </Segment>
@@ -72,15 +74,10 @@ class Cosmos extends React.Component {
 
                             </Grid.Column>
                             <Grid.Column>
-                                <Card
-                                    fluid
-                                    link
-                                    header='Rick Sanchez'
-                                    meta='Scientist'
-                                    description={[
-                                        'Rick is a genius scientist whose alcoholism and reckless,',
-                                        ' nihilistic behavior are a source of concern for his family',
-                                    ].join('')}
+                                <Folder
+                                    name={'Romeo and Juliet'}
+                                    tags={['tag1', 'tag2']}
+                                    progress={60}
                                 />
                             </Grid.Column>
                         </Grid.Row>
