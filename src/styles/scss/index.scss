@@ -1,1 +1,9 @@
-// some changes
+/*
+ * changing margins in Card for CardBox component
+ * @@ namespaces: 
+ *  cards-box should be provided to Card as className property
+ *  progress - semantic's selector
+ */
+ .cards-box .progress{
+     margin: 1em 0 1em !important; 
+ }

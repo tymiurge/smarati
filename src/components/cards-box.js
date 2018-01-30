@@ -22,6 +22,7 @@ class CardsBox extends React.Component {
         return (
             <Segment basic style={{padding: '0 0'}}>
                 <Card
+                    className='cards-box'
                     fluid
                     header={this.props.name}
                     description={this.renderTags(this.props.tags)}
