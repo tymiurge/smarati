@@ -8,7 +8,7 @@ const propTypes = {
     progress: PropTypes.number.isRequired,
 }
 
-class Folder extends React.Component {
+class CardsBox extends React.Component {
 
     renderTags = tags => tags.map(tag => (
             <Label size='tiny' as='a' inverted color='blue'>
@@ -23,16 +23,19 @@ class Folder extends React.Component {
             <Segment basic style={{padding: '0 0'}}>
                 <Card
                     fluid
-                    link
                     header={this.props.name}
                     description={this.renderTags(this.props.tags)}
+                    href="/#"
+                    meta={
+                        <Progress percent={this.props.progress} size='tiny' color='green' />
+                    }
                 />
-                <Progress percent={this.props.progress} attached='bottom' />
+                
             </Segment>
         )
     }
 }
 
-Folder.propTypes = propTypes
+CardsBox.propTypes = propTypes
 
-export default Folder
+export default CardsBox

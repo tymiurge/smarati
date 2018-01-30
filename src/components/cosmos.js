@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button } from 'semantic-ui-react'
-import Folder from './folder'
+import CardsBox from './cards-box'
 
 class Cosmos extends React.Component {
 
@@ -23,58 +23,31 @@ class Cosmos extends React.Component {
                     <Grid columns={4}>
                         <Grid.Row>
                             <Grid.Column>
-                                <Card
-                                    fluid
-                                    link
-                                    header='Refrigerator'
-                                    meta='Scientist'
-                                    description={[
-                                        'Rick is a genius scientist whose alcoholism and reckless,',
-                                        ' nihilistic behavior are a source of concern for his family',
-                                    ].join('')}
+                                <CardsBox
+                                    name={'refregerator'}
+                                    tags={['tag1']}
+                                    progress={70}
                                 />
                             </Grid.Column>
                             <Grid.Column>
-                                <Card
-                                    fluid
-                                    link
-                                    header={'Waiting for Godot'}
+                                <CardsBox
+                                    name={'Door into the summer'}
+                                    tags={['tag1']}
+                                    progress={70}
+                                />
 
-                                    description={
-                                        <div>
-                                            <Label size='tiny' as='a' inverted color='blue'>
-                                                eng
-                                                <Icon name='delete' />
-                                            </Label>
-
-                                            <Progress percent={100} attached='top' />
-                                        </div>
-                                    }
-
+                            </Grid.Column>
+                            <Grid.Column>
+                                <CardsBox
+                                    name={'Waiting for Godot'}
+                                    tags={['tag1']}
+                                    progress={70}
                                 />
 
 
                             </Grid.Column>
                             <Grid.Column>
-                                <Segment basic style={{padding: '0 0'}}>
-                                    <Card
-                                        fluid
-                                        link
-                                        header='Waiting for Godot'
-                                        description={
-                                            <Label size='tiny' as='a' inverted color='blue'>
-                                                eng
-                                                <Icon name='delete' />
-                                            </Label>
-                                        }
-                                    />
-                                    <Progress percent={100} attached='bottom' />
-                                </Segment>
-
-
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Folder
+                                <CardsBox
                                     name={'Romeo and Juliet'}
                                     tags={['tag1', 'tag2']}
                                     progress={60}
