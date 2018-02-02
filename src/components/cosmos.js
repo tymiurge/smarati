@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button } from 'semantic-ui-react'
+import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb } from 'semantic-ui-react'
 import CardsBox from './cards-box'
 
 class Cosmos extends React.Component {
@@ -7,18 +7,32 @@ class Cosmos extends React.Component {
     render () {
         return (
             <Container fluid>
-                <Menu attached='top'>
-                    <Menu.Item active='false'>
-                        <Icon name='snowflake outline'></Icon>
-                    </Menu.Item>
-                    <Menu.Item active='true' name='cards'/>
-                </Menu>
                 <Container className={'p-1em'}>
-                    <Menu secondary>
+                    <Menu secondary className='page-menu'>
                         <Menu.Item>
-                            <Icon name='snowflake outline'></Icon>
+                            <Icon link name='search' size='large'></Icon>
                         </Menu.Item>
-                        <Menu.Item name='cards'/>
+                        <Menu.Item>
+                            <Icon link name='add' size='large'></Icon>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Icon link name='pencil' size='large'></Icon>
+                        </Menu.Item>
+                        
+                        <Menu.Menu position='right'>
+                            <Menu.Item>
+                                <Breadcrumb size='large'>
+                                    <Breadcrumb.Section link>Home</Breadcrumb.Section>
+                                    <Breadcrumb.Divider />
+                                    <Breadcrumb.Section link>Store</Breadcrumb.Section>
+                                    <Breadcrumb.Divider />
+                                    <Breadcrumb.Section active>T-Shirt</Breadcrumb.Section>
+                                </Breadcrumb>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Icon name='user' size='large'></Icon>
+                            </Menu.Item>
+                        </Menu.Menu>
                     </Menu>
                     <Grid columns={4}>
                         <Grid.Row>

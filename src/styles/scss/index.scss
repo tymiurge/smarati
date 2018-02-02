@@ -4,6 +4,10 @@
  *  cards-box should be provided to Card as className property
  *  progress - semantic's selector
  */
- .cards-box .progress{
+ .cards-box .progress {
      margin: 1em 0 1em !important; 
+ }
+
+ .page-menu .item {
+    padding: .78571429em .32857143em !important;
  }
