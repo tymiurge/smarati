@@ -11,7 +11,7 @@ const propTypes = {
 class CardsBox extends React.Component {
 
     renderTags = tags => tags.map(tag => (
-            <Label size='tiny' as='a' inverted color='blue'>
+            <Label size='tiny' color='blue' key={tag}>
                 eng
                 <Icon name='delete' />
             </Label>
