@@ -4,6 +4,17 @@ import CardsBox from './cards-box'
 
 class Cosmos extends React.Component {
 
+    constructor (props) {
+        super(props)
+        this.state = {
+            newItemWizardShown: true
+        }
+    }
+
+    showNewItemWizard = () => {
+
+    }
+
     render () {
         return (
             <Container fluid>
@@ -13,7 +24,7 @@ class Cosmos extends React.Component {
                             <Icon link name='search' size='large'></Icon>
                         </Menu.Item>
                         <Menu.Item>
-                            <Icon link name='add' size='large'></Icon>
+                            <Icon link name='add' size='large' onClick={this.showNewItemWizard}></Icon>
                         </Menu.Item>
                         <Menu.Item>
                             <Icon link name='pencil' size='large'></Icon>
@@ -22,11 +33,7 @@ class Cosmos extends React.Component {
                         <Menu.Menu position='right'>
                             <Menu.Item>
                                 <Breadcrumb size='large'>
-                                    <Breadcrumb.Section link>Home</Breadcrumb.Section>
-                                    <Breadcrumb.Divider />
-                                    <Breadcrumb.Section link>Store</Breadcrumb.Section>
-                                    <Breadcrumb.Divider />
-                                    <Breadcrumb.Section active>T-Shirt</Breadcrumb.Section>
+                                    <Breadcrumb.Section link active>Main Space</Breadcrumb.Section>
                                 </Breadcrumb>
                             </Menu.Item>
                             <Menu.Item>
@@ -34,6 +41,10 @@ class Cosmos extends React.Component {
                             </Menu.Item>
                         </Menu.Menu>
                     </Menu>
+                    {
+                        this.state.newItemWizardShown &&
+                        <Segment>A</Segment>
+                    }
                     <Grid columns={4}>
                         <Grid.Row>
                             <Grid.Column>
