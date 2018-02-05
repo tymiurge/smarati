@@ -1,6 +1,7 @@
 import React from 'react'
-import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb } from 'semantic-ui-react'
+import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form } from 'semantic-ui-react'
 import CardsBox from './cards-box'
+import ItemFactory from './item-factory'
 
 class Cosmos extends React.Component {
 
@@ -43,7 +44,14 @@ class Cosmos extends React.Component {
                     </Menu>
                     {
                         this.state.newItemWizardShown &&
-                        <Segment>A</Segment>
+                        <ItemFactory 
+                            options={[
+                                { key: 'c', text: 'Card', value: 'card' },
+                                { key: 'b', text: 'Card Box', value: 'card-box' },
+                                { key: 'l', text: 'List of Cards', value: 'cards-list' },
+                            ]}
+                            selected={0}
+                        />
                     }
                     <Grid columns={4}>
                         <Grid.Row>
