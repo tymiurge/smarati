@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Segment, Form } from 'semantic-ui-react'
+import { Segment, Form, Button, Input, Label } from 'semantic-ui-react'
 import { TagsInput } from 'r-s-tags-input'
+import CardBoxWizard from './wizards/card-box-wizard'
 
 const propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
@@ -32,10 +33,14 @@ class ItemFactory extends React.Component {
                         <Form.Radio label='Card Box' value='card-box' checked={selected === 'card-box'} onChange={this.handleItemTypeChange} />
                         <Form.Radio label='List of Cards' value='list-of-cards' checked={selected === 'list-of-cards'} onChange={this.handleItemTypeChange} />
                     </Form.Group>
-                    <Form.Field>
-                        <TagsInput tags={['en']} />
-                    </Form.Field>
                 </Form>
+                <CardBoxWizard />
+                    
+                <div>
+                    <Button size='tiny' color='green'>Save</Button>
+                    <Button size='tiny' color='red'>Cancel</Button>
+                </div>
+                
             </Segment>
         )
     }
