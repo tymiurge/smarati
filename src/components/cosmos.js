@@ -2,13 +2,15 @@ import React from 'react'
 import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form } from 'semantic-ui-react'
 import CardsBox from './cards-box'
 import ItemFactory from './item-factory'
+import SearchBar from './search-bar'
 
 class Cosmos extends React.Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            newItemWizardShown: true
+            newItemWizardShown: false,
+            searchBarShown: true
         }
     }
 
@@ -52,6 +54,10 @@ class Cosmos extends React.Component {
                             ]}
                             selected={0}
                         />
+                    }
+                    {
+                        this.state.searchBarShown &&
+                        <SearchBar />
                     }
                     <Grid columns={4}>
                         <Grid.Row>
