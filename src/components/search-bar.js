@@ -1,7 +1,17 @@
 import React from 'react'
-import MenuItem, { Segment, Menu, Input, Checkbox, Icon } from 'semantic-ui-react'
+import { Segment, Menu, Input, Checkbox, Icon } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 class SearchBar extends React.Component {
+
+    static propTypes = {
+        onCloseClick: PropTypes.func
+    }
+
+    static defaultTypes = {
+        onCloseClick: () => {}
+    }
+
     render() {
         return (
             <div style={{marginBottom: '1rem'}}>
@@ -14,7 +24,7 @@ class SearchBar extends React.Component {
                             <Icon name='search' />
                         </Menu.Item>
                         <Menu.Item>
-                            <Icon name='close' />
+                            <Icon name='close' onClick={this.props.onCloseClick}/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>

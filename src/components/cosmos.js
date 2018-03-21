@@ -10,12 +10,16 @@ class Cosmos extends React.Component {
         super(props)
         this.state = {
             newItemWizardShown: false,
-            searchBarShown: true
+            searchBarShown: false
         }
     }
 
-    showNewItemWizard = () => {
+    toggleNewItemWizard = () => {
+        this.setState({...this.state, newItemWizardShown: !this.state.newItemWizardShown})
+    }
 
+    toggleSearchPanel = () => {
+        this.setState({...this.state, searchBarShown: !this.state.searchBarShown})
     }
 
     render () {
@@ -24,10 +28,10 @@ class Cosmos extends React.Component {
                 <Container className={'p-1em'}>
                     <Menu secondary className='page-menu'>
                         <Menu.Item>
-                            <Icon link name='search' size='large'></Icon>
+                            <Icon link name='search' size='large' onClick={this.toggleSearchPanel}></Icon>
                         </Menu.Item>
                         <Menu.Item>
-                            <Icon link name='add' size='large' onClick={this.showNewItemWizard}></Icon>
+                            <Icon link name='add' size='large' onClick={this.toggleNewItemWizard}></Icon>
                         </Menu.Item>
                         <Menu.Item>
                             <Icon link name='pencil' size='large'></Icon>
@@ -45,6 +49,10 @@ class Cosmos extends React.Component {
                         </Menu.Menu>
                     </Menu>
                     {
+                        this.state.searchBarShown &&
+                        <SearchBar onCloseClick={this.toggleSearchPanel} />
+                    }
+                    {
                         this.state.newItemWizardShown &&
                         <ItemFactory 
                             options={[
@@ -54,10 +62,6 @@ class Cosmos extends React.Component {
                             ]}
                             selected={0}
                         />
-                    }
-                    {
-                        this.state.searchBarShown &&
-                        <SearchBar />
                     }
                     <Grid columns={4}>
                         <Grid.Row>
