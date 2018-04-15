@@ -32,13 +32,17 @@ class ItemFactory extends React.Component {
                         <label>Create new: </label>
                         <Form.Radio label='Card' value='card' checked={selected === 'card'} onChange={this.handleItemTypeChange} />
                         <Form.Radio label='Card Box' value='card-box' checked={selected === 'card-box'} onChange={this.handleItemTypeChange} />
-                        <Form.Radio label='List of Cards' value='list-of-cards' checked={selected === 'list-of-cards'} onChange={this.handleItemTypeChange} />
+                        {
+                            //<Form.Radio label='List of Cards' value='list-of-cards' checked={selected === 'list-of-cards'} onChange={this.handleItemTypeChange} />
+                        }
                     </Form.Group>
                 </Form>
                 {
-                    //<CardBoxWizard />
+                    selected === 'card-box' &&
+                    <CardBoxWizard />
                 }
                 {
+                    selected === 'card' &&
                     <CardWizard />
                 }
                     
