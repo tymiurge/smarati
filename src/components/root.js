@@ -3,8 +3,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Cosmos from './cosmos'
 
-const Root = () => (
-    <Provider>
+const Root = ({store}) => (
+    <Provider store={store}>
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Cosmos} />
