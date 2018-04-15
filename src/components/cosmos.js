@@ -1,10 +1,21 @@
 import React from 'react'
 import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form } from 'semantic-ui-react'
-import CardsBox from './cards-box'
+import { CardsBox, SimpleCard } from './card-types'
 import ItemFactory from './item-factory'
 import SearchBar from './search-bar'
+import PropTypes from 'prop-types'
+
+const content = [
+    {
+
+    }
+]
 
 class Cosmos extends React.Component {
+
+    static propTypes = {
+
+    }
 
     constructor (props) {
         super(props)
@@ -94,6 +105,13 @@ class Cosmos extends React.Component {
                                     name={'Romeo and Juliet'}
                                     tags={['tag1', 'tag2']}
                                     progress={60}
+                                />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <SimpleCard 
+                                    name={'confined'}
                                 />
                             </Grid.Column>
                         </Grid.Row>
