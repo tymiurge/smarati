@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Segment, Form, Button, Input, Label } from 'semantic-ui-react'
 import { TagsInput } from 'r-s-tags-input'
-import CardBoxWizard from './wizards/card-box-wizard'
-import CardWizard from './wizards/card-wizard'
+import CardBoxWizard from './../wizards/card-box-wizard'
+import CardWizard from './../wizards/card-wizard'
 
 const propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({

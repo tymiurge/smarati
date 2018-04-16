@@ -1,8 +1,7 @@
 import React from 'react'
-import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form, GridRow } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import { CardsBox, SimpleCard } from './card-types'
-import ItemFactory from './item-factory'
-import SearchBar from './search-bar'
+import { CosmosMenu, SearchBar, ItemFactory } from './cosmos-fragments'
 import PropTypes from 'prop-types'
 import { chunkArray } from './../helpers'
 
@@ -118,28 +117,11 @@ class Cosmos extends React.Component {
         return (
             <Container fluid>
                 <Container className={'p-1em'}>
-                    <Menu secondary className='page-menu'>
-                        <Menu.Item>
-                            <Icon link name='search' size='large' onClick={this.toggleSearchPanel}></Icon>
-                        </Menu.Item>
-                        <Menu.Item>
-                            <Icon link name='add' size='large' onClick={this.toggleNewItemWizard}></Icon>
-                        </Menu.Item>
-                        <Menu.Item>
-                            <Icon link name='pencil' size='large'></Icon>
-                        </Menu.Item>
-                        
-                        <Menu.Menu position='right'>
-                            <Menu.Item>
-                                <Breadcrumb size='large'>
-                                    <Breadcrumb.Section link active>Main Space</Breadcrumb.Section>
-                                </Breadcrumb>
-                            </Menu.Item>
-                            <Menu.Item>
-                                <Icon name='user' size='large'></Icon>
-                            </Menu.Item>
-                        </Menu.Menu>
-                    </Menu>
+                    <CosmosMenu
+                        onSearchClick={this.toggleSearchPanel}
+                        onAddClick={this.toggleNewItemWizard}
+                    />
+                    
                     {
                         this.state.searchBarShown &&
                         <SearchBar onCloseClick={this.toggleSearchPanel} />
