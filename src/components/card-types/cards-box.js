@@ -12,7 +12,7 @@ class CardsBox extends React.Component {
 
     renderTags = tags => tags.map(tag => (
             <Label size='tiny' color='blue' key={tag}>
-                eng
+                {tag}
                 <Icon name='delete' />
             </Label>
         )
