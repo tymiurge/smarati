@@ -1,13 +1,51 @@
 import React from 'react'
-import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form } from 'semantic-ui-react'
+import { Container, Menu, Icon, Card, Grid, Progress, Label, Segment, Button, Breadcrumb, Form, GridRow } from 'semantic-ui-react'
 import { CardsBox, SimpleCard } from './card-types'
 import ItemFactory from './item-factory'
 import SearchBar from './search-bar'
 import PropTypes from 'prop-types'
+import { chunkArray } from './../helpers'
 
 const content = [
     {
-
+        id: 1,
+        type: 'box',
+        name: 'refregerator',
+        tags: ['tag1'],
+        progress: 90
+    }, 
+    {
+        id: 2, 
+        type: 'box',
+        name: 'waiting for godoth',
+        tags: ['t1', 't2'],
+        progress: 89
+    },
+    {
+        id: 3,
+        type: 'box',
+        name: 'linux',
+        tags: ['t2', 'linux'],
+        progress: 10
+    },
+    {
+        id: 4,
+        type: 'box',
+        name: 'romeo and juliet',
+        tags: ['t3', 't4'],
+        progress: 48
+    },
+    {
+        id: 5,
+        type: 'box',
+        name: 'leviaphan wakes',
+        tags: ['t5', 't6'],
+        progress: 25
+    }, 
+    {
+        id: 6,
+        type: 'simple',
+        name: 'confined' 
     }
 ]
 
@@ -32,6 +70,49 @@ class Cosmos extends React.Component {
     toggleSearchPanel = () => {
         this.setState({...this.state, searchBarShown: !this.state.searchBarShown})
     }
+
+    renderCards = () => 
+        chunkArray(content.filter(card => card.type !== 'box'), 4)
+        .map((row, rowIdx) => (
+            <Grid.Row key={`_cosmos_cards_row_${rowIdx}`}>
+                {
+                    row.map((memoCard, memoCardIdx) => (
+                        
+                        <Grid.Column key={`_cosmos_cards_memo_${memoCardIdx}`}>
+                            {
+                                memoCard.type === 'simple' &&
+                                <SimpleCard
+                                    name={memoCard.name}
+                                />    
+                            }
+                        </Grid.Column>
+                    ))
+                }
+            </Grid.Row>
+        ))
+
+    renderCardBoxes = () => 
+        chunkArray(content.filter(card => card.type === 'box'), 4)
+        .map((row, rowIdx) => (
+            <Grid.Row key={`_cosmos_boxes_row_${rowIdx}`}>
+                { 
+                    row.map((box, boxIdx) => (
+                        <Grid.Column key={`_cosmos_cards_box_${boxIdx}`}>
+                            <CardsBox
+                                name={box.name}
+                                tags={box.tags}
+                                progress={box.progress}
+                            />
+                        </Grid.Column>
+                    ))
+                }
+            </Grid.Row>
+        ))
+
+    renderCardsGrid = () => [
+        ...this.renderCardBoxes(),
+        ...this.renderCards()
+    ]
 
     render () {
         return (
@@ -75,51 +156,8 @@ class Cosmos extends React.Component {
                         />
                     }
                     <Grid columns={4}>
-                        <Grid.Row>
-                            <Grid.Column>
-                                <CardsBox
-                                    name={'refregerator'}
-                                    tags={['tag1']}
-                                    progress={70}
-                                />
-                            </Grid.Column>
-                            <Grid.Column>
-                                <CardsBox
-                                    name={'Door into the summer'}
-                                    tags={['tag1']}
-                                    progress={70}
-                                />
-
-                            </Grid.Column>
-                            <Grid.Column>
-                                <CardsBox
-                                    name={'Waiting for Godot'}
-                                    tags={['tag1']}
-                                    progress={70}
-                                />
-
-
-                            </Grid.Column>
-                            <Grid.Column>
-                                <CardsBox
-                                    name={'Romeo and Juliet'}
-                                    tags={['tag1', 'tag2']}
-                                    progress={60}
-                                />
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column>
-                                <SimpleCard 
-                                    name={'confined'}
-                                />
-                            </Grid.Column>
-                        </Grid.Row>
+                        { this.renderCardsGrid() }
                     </Grid>
-                </Container>
-
-                <Container >
-
                 </Container>
             </Container>
         )
