@@ -98,6 +98,7 @@ class Cosmos extends React.Component {
                                 { key: 'l', text: 'List of Cards', value: 'cards-list' },
                             ]}
                             selected={0}
+                            onCancelClick={() => this.toggleNewItemWizard()}
                         />
                     }
                     <Grid columns={Cosmos.GIRD_SIZE}>

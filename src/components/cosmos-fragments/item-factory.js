@@ -10,7 +10,8 @@ const propTypes = {
         text: PropTypes.string,
         value: PropTypes.string
     })).isRequired,
-    selected: PropTypes.number.isRequired
+    selected: PropTypes.number.isRequired,
+    onCancelClick: PropTypes.func.isRequired
 }
 
 class ItemFactory extends React.Component {
@@ -48,7 +49,7 @@ class ItemFactory extends React.Component {
                     
                 <div>
                     <Button size='tiny' color='green'>Save</Button>
-                    <Button size='tiny' color='red'>Cancel</Button>
+                    <Button size='tiny' color='red' onClick={this.props.onCancelClick}>Cancel</Button>
                 </div>
                 
             </Segment>
