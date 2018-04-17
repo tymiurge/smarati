@@ -1,13 +1,13 @@
 import * as api from './../api'
 
 const COSMOS_CONTENT_REQUEST = 'cosmos/content/request'
-const CARD_ADD_REQUEST = 'card/add/request'
+const CARD_ADDED = 'card/add/request'
 
 const cosmos = (state = [], action) => {
     switch (action.type) {
         case COSMOS_CONTENT_REQUEST: 
             return action.content
-        case CARD_ADD_REQUEST:
+        case CARD_ADDED:
             return [...state, action.card]
         default: 
             return state
@@ -27,21 +27,8 @@ export const fetchContent = parentId => dispatch =>
         content
     })) 
 
-
-// ACTIONS 
-
-/*
-export const fetchForms = () => dispatch => {
-    api.fetchFormsList().then(list => {
-        dispatch({
-            type: LIST_RECEIVED,
-            list
-        })
-    })
-}
-
-export const deleteForm = formId => ({
-    type: FORM_DELETED,
-    formId
-})
-*/
+export const saveCard = card => dispatch => 
+    api.saveCard(card).then(savedCard => dispatch({
+        type: CARD_ADDED,
+        card: savedCard
+    }))

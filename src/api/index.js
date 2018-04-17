@@ -59,3 +59,7 @@ const _content = [
 export const fetchCards = parentId => delay(30).then( () => {
     return _content
 })
+
+export const saveCard = card => delay(30).then(() => {
+    return card
+})
