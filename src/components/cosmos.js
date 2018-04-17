@@ -44,11 +44,26 @@ const content = [
     {
         id: 6,
         type: 'simple',
-        name: 'confined' 
+        name: 'confined',
+        progress: 6 
+    },
+    {
+        id: 7,
+        type: 'simple',
+        name: 'limp',
+        progress: 0, 
+    },
+    {
+        id: 8,
+        type: 'simple',
+        name: 'crank',
+        progress: 3
     }
 ]
 
 class Cosmos extends React.Component {
+
+    static GIRD_SIZE = 4
 
     static propTypes = {
 
@@ -82,6 +97,7 @@ class Cosmos extends React.Component {
                                 memoCard.type === 'simple' &&
                                 <SimpleCard
                                     name={memoCard.name}
+                                    progress={memoCard.progress}
                                 />    
                             }
                         </Grid.Column>
@@ -121,7 +137,6 @@ class Cosmos extends React.Component {
                         onSearchClick={this.toggleSearchPanel}
                         onAddClick={this.toggleNewItemWizard}
                     />
-                    
                     {
                         this.state.searchBarShown &&
                         <SearchBar onCloseClick={this.toggleSearchPanel} />
@@ -137,7 +152,7 @@ class Cosmos extends React.Component {
                             selected={0}
                         />
                     }
-                    <Grid columns={4}>
+                    <Grid columns={Cosmos.GIRD_SIZE}>
                         { this.renderCardsGrid() }
                     </Grid>
                 </Container>
