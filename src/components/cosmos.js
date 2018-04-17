@@ -4,77 +4,25 @@ import { CardsBox, SimpleCard } from './card-types'
 import { CosmosMenu, SearchBar, ItemFactory } from './cosmos-fragments'
 import PropTypes from 'prop-types'
 import { chunkArray } from './../helpers'
-
-const content = [
-    {
-        id: 1,
-        type: 'box',
-        name: 'refregerator',
-        tags: ['tag1'],
-        progress: 90
-    }, 
-    {
-        id: 2, 
-        type: 'box',
-        name: 'waiting for godoth',
-        tags: ['t1', 't2'],
-        progress: 89
-    },
-    {
-        id: 3,
-        type: 'box',
-        name: 'linux',
-        tags: ['t2', 'linux'],
-        progress: 10
-    },
-    {
-        id: 4,
-        type: 'box',
-        name: 'romeo and juliet',
-        tags: ['t3', 't4'],
-        progress: 48
-    },
-    {
-        id: 5,
-        type: 'box',
-        name: 'leviaphan wakes',
-        tags: ['t5', 't6'],
-        progress: 25
-    }, 
-    {
-        id: 6,
-        type: 'simple',
-        name: 'confined',
-        progress: 6 
-    },
-    {
-        id: 7,
-        type: 'simple',
-        name: 'limp',
-        progress: 0, 
-    },
-    {
-        id: 8,
-        type: 'simple',
-        name: 'crank',
-        progress: 3
-    }
-]
+import { fetchContent } from '../reducers/cosmos'
+import { connect } from 'react-redux'
 
 class Cosmos extends React.Component {
 
     static GIRD_SIZE = 4
 
     static propTypes = {
-
+        data: PropTypes.array.isRequired,
+        onPageMount: PropTypes.func.isRequired
     }
 
-    constructor (props) {
-        super(props)
-        this.state = {
-            newItemWizardShown: false,
-            searchBarShown: false
-        }
+    state = {
+        newItemWizardShown: false,
+        searchBarShown: false
+    }
+
+    componentDidMount () {
+        this.props.onPageMount()
     }
 
     toggleNewItemWizard = () => {
@@ -86,7 +34,7 @@ class Cosmos extends React.Component {
     }
 
     renderCards = () => 
-        chunkArray(content.filter(card => card.type !== 'box'), 4)
+        chunkArray(this.props.data.filter(card => card.type !== 'box'), 4)
         .map((row, rowIdx) => (
             <Grid.Row key={`_cosmos_cards_row_${rowIdx}`}>
                 {
@@ -107,7 +55,7 @@ class Cosmos extends React.Component {
         ))
 
     renderCardBoxes = () => 
-        chunkArray(content.filter(card => card.type === 'box'), 4)
+        chunkArray(this.props.data.filter(card => card.type === 'box'), 4)
         .map((row, rowIdx) => (
             <Grid.Row key={`_cosmos_boxes_row_${rowIdx}`}>
                 { 
@@ -161,4 +109,18 @@ class Cosmos extends React.Component {
     }
 }
 
-export default Cosmos
+const mapStateToProps = state => ({
+    data: state.cosmos
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPageMount: () => { dispatch(fetchContent()) }
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Cosmos)
