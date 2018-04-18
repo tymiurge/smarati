@@ -18,7 +18,7 @@ class CardBoxWizard extends React.Component {
         const { tags } = state
         this.setState(
             {...state, tags: newTags},
-            this.props.onValuesChange(state)
+            () => this.props.onValuesChange(state)
         )
     }
 
@@ -28,7 +28,7 @@ class CardBoxWizard extends React.Component {
 
     onFrontContentChange = value => this.setState(
         {...this.state, frontContent: value},
-        this.props.onValuesChange(this.state)
+        () => this.props.onValuesChange(this.state)
     )
 
     render() {
@@ -41,7 +41,7 @@ class CardBoxWizard extends React.Component {
                             control={Input}
                             label='Card box title'
                             value={frontContent}
-                            onChange={e => onFrontContentChange(e.target.value)}
+                            onChange={e => this.onFrontContentChange(e.target.value)}
                         />
                         <Form.Field>
                             <label>Tags</label>

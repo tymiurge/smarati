@@ -4,16 +4,18 @@ import { CardsBox, SimpleCard } from './card-types'
 import { CosmosMenu, SearchBar, ItemFactory } from './cosmos-fragments'
 import PropTypes from 'prop-types'
 import { chunkArray } from './../helpers'
-import { fetchContent } from '../reducers/cosmos'
+import { fetchContent, saveCard } from '../reducers/cosmos'
 import { connect } from 'react-redux'
 
+// todo: fix the empty tags at adding card box
 class Cosmos extends React.Component {
 
     static GIRD_SIZE = 4
 
     static propTypes = {
         data: PropTypes.array.isRequired,
-        onPageMount: PropTypes.func.isRequired
+        onPageMount: PropTypes.func.isRequired,
+        onCardSavingRequest: PropTypes.func.isRequired
     }
 
     state = {
@@ -31,6 +33,11 @@ class Cosmos extends React.Component {
 
     toggleSearchPanel = () => {
         this.setState({...this.state, searchBarShown: !this.state.searchBarShown})
+    }
+
+    onCardSave = (cardType, data) => {
+        const sData = {...data, type: cardType}
+        this.props.onCardSavingRequest(sData)
     }
 
     renderCards = () => 
@@ -92,9 +99,8 @@ class Cosmos extends React.Component {
                     {
                         this.state.newItemWizardShown &&
                         <ItemFactory 
-                            
-                            selected={0}
-                            onCancelClick={() => this.toggleNewItemWizard()}
+                            onCancel={ () => this.toggleNewItemWizard() }
+                            onSave={ (type, data) => this.onCardSave(type, data)}
                         />
                     }
                     <Grid columns={Cosmos.GIRD_SIZE}>
@@ -112,7 +118,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPageMount: () => { dispatch(fetchContent()) }
+        onPageMount: () => dispatch(fetchContent()),
+        onCardSavingRequest: data => dispatch(saveCard(data)) 
     }
 }
 

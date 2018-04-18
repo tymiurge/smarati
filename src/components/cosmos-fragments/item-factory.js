@@ -9,13 +9,9 @@ import CardWizard from './../wizards/card-wizard'
 class ItemFactory extends React.Component {
 
     static propTypes = {
-        onCancelClick: PropTypes.func.isRequired
+        onCancel: PropTypes.func.isRequired,
+        onSave: PropTypes.func.isRequired
     }
-
-    state = {
-        selectedType: 'card',
-        data: null
-    } 
 
     wizardTypes= [
         { 
@@ -26,6 +22,11 @@ class ItemFactory extends React.Component {
         },
         //{ key: 'l', text: 'List of Cards', value: 'cards-list' }
     ]
+
+    state = {
+        selectedType: 'card',
+        data: null
+    } 
     
     renderWizardSelector = () => (
         <Form>
@@ -48,12 +49,14 @@ class ItemFactory extends React.Component {
         </Form>
     )
 
-    onWizardPropsChange = data => console.log('ok')
+    onWizardPropsChange = data => this.setState({...this.state, data})
+
+    onSave = () => this.props.onSave(this.state.selectedType, this.state.data)
 
     renderWizard = () => {
         const { selectedType } = this.state
         const Wizard = this.wizardTypes.find(type => type.value === selectedType).wizard
-        return <Wizard onPropsChange={this.onWizardPropsChange} />
+        return <Wizard onValuesChange={this.onWizardPropsChange} />
     }
 
     handleItemTypeChange = value  => {
@@ -67,15 +70,13 @@ class ItemFactory extends React.Component {
                 { this.renderWizardSelector() }
                 { this.renderWizard() }
                 <div>
-                    <Button size='tiny' color='green'>Save</Button>
-                    <Button size='tiny' color='red' onClick={this.props.onCancelClick}>Cancel</Button>
+                    <Button size='tiny' color='green' onClick={() => this.onSave()}>Save</Button>
+                    <Button size='tiny' color='red' onClick={this.props.onCancel}>Cancel</Button>
                 </div>
                 
             </Segment>
         )
     }
 }
-
-// ItemFactory.propTypes = propTypes
 
 export default ItemFactory
