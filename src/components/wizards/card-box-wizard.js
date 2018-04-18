@@ -18,7 +18,7 @@ class CardBoxWizard extends React.Component {
         const { tags } = state
         this.setState(
             {...state, tags: newTags},
-            () => this.props.onValuesChange(state)
+            () => this.props.onValuesChange(this.state)
         )
     }
 

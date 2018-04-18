@@ -35,11 +35,6 @@ class Cosmos extends React.Component {
         this.setState({...this.state, searchBarShown: !this.state.searchBarShown})
     }
 
-    onCardSave = (cardType, data) => {
-        const sData = {...data, type: cardType}
-        this.props.onCardSavingRequest(sData)
-    }
-
     renderCards = () => 
         chunkArray(this.props.data.filter(card => card.type !== 'box'), 4)
         .map((row, rowIdx) => (
@@ -100,7 +95,7 @@ class Cosmos extends React.Component {
                         this.state.newItemWizardShown &&
                         <ItemFactory 
                             onCancel={ () => this.toggleNewItemWizard() }
-                            onSave={ (type, data) => this.onCardSave(type, data)}
+                            onSave={ data => this.props.onCardSavingRequest(data)}
                         />
                     }
                     <Grid columns={Cosmos.GIRD_SIZE}>

@@ -49,9 +49,14 @@ class ItemFactory extends React.Component {
         </Form>
     )
 
-    onWizardPropsChange = data => this.setState({...this.state, data})
+    onWizardPropsChange = data => {
+        this.setState({...this.state, data})
+    }
 
-    onSave = () => this.props.onSave(this.state.selectedType, this.state.data)
+    onSave = () => this.props.onSave({
+        ...this.state.data,
+        type: this.state.selectedType
+    })
 
     renderWizard = () => {
         const { selectedType } = this.state
