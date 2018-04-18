@@ -13,7 +13,8 @@ class ItemFactory extends React.Component {
     }
 
     state = {
-        selectedType: 'card'
+        selectedType: 'card',
+        data: null
     } 
 
     wizardTypes= [
@@ -56,7 +57,7 @@ class ItemFactory extends React.Component {
     }
 
     handleItemTypeChange = value  => {
-        this.setState(Object.assign({}, this.state, {selectedType: value}))
+        this.setState(Object.assign({}, this.state, {selectedType: value, data: null}))
     }
 
     render () {

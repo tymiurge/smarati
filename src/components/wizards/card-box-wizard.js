@@ -2,29 +2,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form , Input, Segment } from 'semantic-ui-react'
 import { TagsInput } from 'r-s-tags-input'
-import { ef } from './../../helpers'
 
 class CardBoxWizard extends React.Component {
     static propTypes = {
-        frontContent: PropTypes.string,
-        tags: PropTypes.string,
-        onFrontContentChange: PropTypes.func,
-        onTagsChange: PropTypes.func
+        onValuesChange: PropTypes.func.isRequired
     }
 
-    static defaultProps = {
+    state = {
         frontContent: '',
-        tags: [],
-        onFrontContentChange: ef,
-        onTagsChange: ef
+        tags: []
     }
 
-    onTagRemove = tag => this.props.onTagsChange(this.props.tags.filter(propsTag => propsTag === tag))
+    onTagsChange = newTags => {
+        const { state } = this
+        const { tags } = state
+        this.setState(
+            {...state, tags: newTags},
+            this.props.onValuesChange(state)
+        )
+    }
 
-    onTagAdd = tag => this.props.onTagsChange(this.props.tags.push(tag))
+    onTagRemove = tag => this.onTagsChange(this.state.tags.filter(stateTag => stateTag === tag))
+
+    onTagAdd = tag => this.onTagsChange([...this.state.tags, tag])
+
+    onFrontContentChange = value => this.setState(
+        {...this.state, frontContent: value},
+        this.props.onValuesChange(this.state)
+    )
 
     render() {
-        const { frontContent, tags, onFrontContentChange, onTagsChange } = this.props
+        const { frontContent, tags } = this.state
         return (
             <Segment>
                 <Form>
@@ -33,7 +41,7 @@ class CardBoxWizard extends React.Component {
                             control={Input}
                             label='Card box title'
                             value={frontContent}
-                            onChange={onFrontContentChange}
+                            onChange={e => onFrontContentChange(e.target.value)}
                         />
                         <Form.Field>
                             <label>Tags</label>
