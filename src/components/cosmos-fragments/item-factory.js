@@ -5,48 +5,66 @@ import { TagsInput } from 'r-s-tags-input'
 import CardBoxWizard from './../wizards/card-box-wizard'
 import CardWizard from './../wizards/card-wizard'
 
-const propTypes = {
-    options: PropTypes.arrayOf(PropTypes.shape({
-        text: PropTypes.string,
-        value: PropTypes.string
-    })).isRequired,
-    selected: PropTypes.number.isRequired,
-    onCancelClick: PropTypes.func.isRequired
-}
 
 class ItemFactory extends React.Component {
 
-    state = {
-        selected: 'card'
-    }    
+    static propTypes = {
+        onCancelClick: PropTypes.func.isRequired
+    }
 
-    handleItemTypeChange = (e, { value: selected } ) => {
-        this.setState(Object.assign({}, this.state, {selected}))
+    state = {
+        selectedType: 'card'
+    } 
+
+    wizardTypes= [
+        { 
+            key: 'c', text: 'Card', value: 'card', wizard: CardWizard
+        },
+        { 
+            key: 'b', text: 'Card Box', value: 'box', wizard: CardBoxWizard            
+        },
+        //{ key: 'l', text: 'List of Cards', value: 'cards-list' }
+    ]
+    
+    renderWizardSelector = () => (
+        <Form>
+            <Form.Group inline>
+                <label>Create new: </label>
+                {
+                    this.wizardTypes.map(type => (
+                        <Form.Radio
+                            key={type.key}
+                            label={type.text}
+                            value={type.value}
+                            checked={this.state.selectedType === type.value}
+                            onChange={(e, { value }) => {
+                                this.handleItemTypeChange(value)
+                            }}
+                        />
+                    ))
+                }
+            </Form.Group>
+        </Form>
+    )
+
+    onWizardPropsChange = data => console.log('ok')
+
+    renderWizard = () => {
+        const { selectedType } = this.state
+        const Wizard = this.wizardTypes.find(type => type.value === selectedType).wizard
+        return <Wizard onPropsChange={this.onWizardPropsChange} />
+    }
+
+    handleItemTypeChange = value  => {
+        this.setState(Object.assign({}, this.state, {selectedType: value}))
     }
 
     render () {
         const { selected } = this.state
         return (
             <Segment>
-                <Form>
-                    <Form.Group inline>
-                        <label>Create new: </label>
-                        <Form.Radio label='Card' value='card' checked={selected === 'card'} onChange={this.handleItemTypeChange} />
-                        <Form.Radio label='Card Box' value='card-box' checked={selected === 'card-box'} onChange={this.handleItemTypeChange} />
-                        {
-                            //<Form.Radio label='List of Cards' value='list-of-cards' checked={selected === 'list-of-cards'} onChange={this.handleItemTypeChange} />
-                        }
-                    </Form.Group>
-                </Form>
-                {
-                    selected === 'card-box' &&
-                    <CardBoxWizard />
-                }
-                {
-                    selected === 'card' &&
-                    <CardWizard />
-                }
-                    
+                { this.renderWizardSelector() }
+                { this.renderWizard() }
                 <div>
                     <Button size='tiny' color='green'>Save</Button>
                     <Button size='tiny' color='red' onClick={this.props.onCancelClick}>Cancel</Button>

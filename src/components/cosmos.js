@@ -92,11 +92,7 @@ class Cosmos extends React.Component {
                     {
                         this.state.newItemWizardShown &&
                         <ItemFactory 
-                            options={[
-                                { key: 'c', text: 'Card', value: 'card' },
-                                { key: 'b', text: 'Card Box', value: 'card-box' },
-                                { key: 'l', text: 'List of Cards', value: 'cards-list' },
-                            ]}
+                            
                             selected={0}
                             onCancelClick={() => this.toggleNewItemWizard()}
                         />
