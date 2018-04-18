@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Segment, Form, Button, Input, Label } from 'semantic-ui-react'
-import { TagsInput } from 'r-s-tags-input'
-import CardBoxWizard from './../wizards/card-box-wizard'
-import CardWizard from './../wizards/card-wizard'
-
+import { Segment, Form, Button } from 'semantic-ui-react'
+import { CardBoxWizard, CardWizard } from './cards-wizards'
 
 class ItemFactory extends React.Component {
 
@@ -69,7 +66,6 @@ class ItemFactory extends React.Component {
     }
 
     render () {
-        const { selected } = this.state
         return (
             <Segment>
                 { this.renderWizardSelector() }
