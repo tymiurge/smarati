@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Form , Input, Segment, Grid, TextArea } from 'semantic-ui-react'
-import { TagsInput } from 'r-s-tags-input'
+//import PropTypes from 'prop-types'
+import { Form , Segment, TextArea } from 'semantic-ui-react'
 
 class CardWizard extends React.Component {
     render() {
