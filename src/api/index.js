@@ -1,4 +1,7 @@
+import superagent from 'superagent'
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+const API_HOST = 'http://localhost:4000'
 
 const _content = [
     {
@@ -60,6 +63,28 @@ export const fetchCards = parentId => delay(30).then( () => {
     return _content
 })
 
-export const saveCard = card => delay(30).then(() => {
+export const saveCard = card => {
+    /*
+    return superagent.post('http://localhost:4000/api/card/add')
+        .set('Content-Type', 'application/json')
+        .send(card)
+        .then(response => {
+            console.log(response)
+        })
+    */
+    return fetch('http://localhost:4000/api/card/add', {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        }),
+        body: JSON.stringify(card),
+        mode: 'cors'
+    })
+    
+}
+    
+
+/*delay(30).then(() => {
     return card
-})
+})*/
