@@ -1,13 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Container, Grid } from 'semantic-ui-react'
 import { CardsBox, SimpleCard } from './card-types'
 import { CosmosMenu, SearchBar, ItemFactory } from './cosmos-fragments'
-import PropTypes from 'prop-types'
-import { chunkArray } from './../helpers'
 import { fetchContent, saveCard } from '../reducers/cosmos'
-import { connect } from 'react-redux'
+import { chunkArray } from './../helpers'
 
-// todo: fix the empty tags at adding card box
 class Cosmos extends React.Component {
 
     static GIRD_SIZE = 4
