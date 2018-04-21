@@ -79,6 +79,11 @@ class Cosmos extends React.Component {
         ...this.renderCards()
     ]
 
+    onCardSave = data => this.setState(
+        {...this.state, newItemWizardShown: false},
+        () => this.props.onCardSavingRequest(data)
+    )
+
     render () {
         return (
             <Container fluid>
@@ -95,7 +100,7 @@ class Cosmos extends React.Component {
                         this.state.newItemWizardShown &&
                         <ItemFactory 
                             onCancel={ () => this.toggleNewItemWizard() }
-                            onSave={ data => this.props.onCardSavingRequest(data)}
+                            onSave={ data => this.onCardSave(data)}
                         />
                     }
                     <Grid columns={Cosmos.GIRD_SIZE}>
