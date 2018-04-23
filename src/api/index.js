@@ -58,7 +58,7 @@ const _content = [
 ]
 
 export const fetchCards = parentId => delay(30).then( () => {
-    return _content
+    return []//_content
 })
 
 export const saveCard = card => 

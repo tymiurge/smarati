@@ -14,7 +14,7 @@ const fetchMade = (state = false, action) => {
     }
 }
 
-const constent = (state = [], action) => {
+const content = (state = [], action) => {
     switch (action.type) {
         case COSMOS_CONTENT_REQUEST: 
             return action.content

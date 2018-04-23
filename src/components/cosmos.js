@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Container, Grid } from 'semantic-ui-react'
 import { CardsBox, SimpleCard } from './card-types'
-import { CosmosMenu, SearchBar, ItemFactory } from './cosmos-fragments'
+import { CosmosMenu, SearchBar, ItemFactory, NoDataMessage } from './cosmos-fragments'
 import { fetchContent, saveCard } from '../reducers/cosmos'
 import { chunkArray } from './../helpers'
 
@@ -13,6 +13,7 @@ class Cosmos extends React.Component {
 
     static propTypes = {
         data: PropTypes.array.isRequired,
+        fetchMade: PropTypes.bool.isRequired,
         onPageMount: PropTypes.func.isRequired,
         onCardSavingRequest: PropTypes.func.isRequired
     }
@@ -102,9 +103,17 @@ class Cosmos extends React.Component {
                             onSave={ data => this.onCardSave(data)}
                         />
                     }
-                    <Grid columns={Cosmos.GIRD_SIZE}>
-                        { this.renderCardsGrid() }
-                    </Grid>
+                    {
+                        this.props.fetchMade && this.props.data.length === 0 &&
+                        <NoDataMessage />
+                    }
+                    {
+                        this.props.fetchMade && this.props.data.length > 1 &&
+                        <Grid columns={Cosmos.GIRD_SIZE}>
+                            { this.renderCardsGrid() }
+                        </Grid>
+                    }
+                    
                 </Container>
             </Container>
         )
@@ -112,7 +121,8 @@ class Cosmos extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    data: state.cosmos
+    data: state.cosmos.content,
+    fetchMade: state.cosmos.fetchMade
 })
 
 const mapDispatchToProps = dispatch => {
