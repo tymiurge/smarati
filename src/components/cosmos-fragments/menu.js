@@ -22,13 +22,20 @@ class CosmosMenu extends React.Component {
                 <Menu.Item>
                     <Icon link name='pencil' size='large'></Icon>
                 </Menu.Item>
+                <Menu.Item>
+                    <Breadcrumb size='large'>
+                        <Breadcrumb.Section link>Main Space</Breadcrumb.Section>
+                        <Breadcrumb.Divider><Icon name='angle right' /></Breadcrumb.Divider>
+                        <Breadcrumb.Section active>Waiting for godoth</Breadcrumb.Section>
+                        <Breadcrumb.Divider><Icon name='lightning'/></Breadcrumb.Divider>
+                        <Breadcrumb.Section link>Uncompleted cards</Breadcrumb.Section>
+                        <Breadcrumb.Divider><Icon name='lightning'/></Breadcrumb.Divider>
+                        <Breadcrumb.Section link>Learn</Breadcrumb.Section>
+                    </Breadcrumb>
+                </Menu.Item>
                 
                 <Menu.Menu position='right'>
-                    <Menu.Item>
-                        <Breadcrumb size='large'>
-                            <Breadcrumb.Section link active>Main Space</Breadcrumb.Section>
-                        </Breadcrumb>
-                    </Menu.Item>
+                    
                     <Menu.Item>
                         <Icon name='user' size='large'></Icon>
                     </Menu.Item>
