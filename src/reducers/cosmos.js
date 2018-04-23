@@ -2,8 +2,19 @@ import * as api from './../api'
 
 const COSMOS_CONTENT_REQUEST = 'cosmos/content/request'
 const CARD_ADDED = 'card/add/request'
+const FETCH_COMPLETE = 'cosmos/fetch/complete'
 
-const cosmos = (state = [], action) => {
+
+const fetchMade = (state = false, action) => {
+    switch (action.type) {
+        case FETCH_COMPLETE:
+            return true
+        default:
+            return state
+    }
+}
+
+const constent = (state = [], action) => {
     switch (action.type) {
         case COSMOS_CONTENT_REQUEST: 
             return action.content
@@ -14,6 +25,11 @@ const cosmos = (state = [], action) => {
     }
 }
 
+const cosmos = (state = {}, action) => ({
+    fetchMade: fetchMade(state.fetchMade, action),
+    content: content(state.content, action)
+})
+
 export default cosmos
 
 // ***************************************************************
@@ -22,10 +38,15 @@ export default cosmos
 
 
 export const fetchContent = parentId => dispatch => 
-    api.fetchCards(parentId).then(content => dispatch({
-        type: COSMOS_CONTENT_REQUEST,
-        content
-    })) 
+    api.fetchCards(parentId).then(content => {
+        dispatch({
+            type: COSMOS_CONTENT_REQUEST,
+            content
+        })
+        dispatch({
+            type: FETCH_COMPLETE
+        })
+    }) 
 
 export const saveCard = card => dispatch => 
     api.saveCard(card).then(savedCard => dispatch({
